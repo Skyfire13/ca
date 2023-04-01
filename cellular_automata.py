@@ -123,30 +123,33 @@ Args  | type | Description
 @rule | int  | Which rule number to apply, 0-255 valid
 """
 def main():
-    arg1 = sys.argv[1]
-    arg2 = sys.argv[2]
-
-    # Input error handlng
-    if rule < 0 or rule > 255:
-        print("Error - Rule must be between 0 and 255")
+    # Error handlng to ensure inputs are of the correct type and range
+    if len(sys.argv) != 3:
+        print("Error - Must include size and rule number")
         exit()
-    if rule % 1 != 0:
+    if int(sys.argv[1]) % 1 != 0:
+        print("Error - Size must be an integer")
+        exit()
+    if int(sys.argv[1]) < 0:
+        print("Error - Size must be a positive integer")
+        exit()
+    if int(sys.argv[2]) % 1 != 0:
         print("Error - Rule must be an integer")
         exit()
-
+    if int(sys.argv[2]) < 0 or int(sys.argv[2]) > 255:
+        print("Error - Rule must be between 0 and 255")
+        exit()
+    
     #size = iterations(2) - 1
     #(size + 1) / 2 = iterations
     size = int(sys.argv[1])
     rule = int(sys.argv[2])
     iterations = round((size + 1) /2)
-
+    
     loop(size, rule, iterations)
 
 
-#main()
-
-test = float(sys.argv[1])
-print(type(test))
+main()
 
 
 
