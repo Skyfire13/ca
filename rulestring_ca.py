@@ -1,9 +1,36 @@
+# Life-like CA generator that generates cellular automata through rulestrings
+# A rulestring is the notation symbolizing which cells will be born, which
+# cells will survive, and which cells will die moving into the next iteration.
+#
+# Rulestring Format(Birth/Survival Notation):
+#
+# B23S15
+#
+# Any numbers following the "B" represent the amount of neighbors an empty
+# cell must have for the cell to turn active in the next generation
+# Any numbers following the "S" represent the amount of neighbors a living
+# cell must have to survive to the next generation
+# Any cell that is covered by the birth/survival notation dies moving into
+# the next generation.
+
 
 import numpy as np
 import random
 import keyboard
 import time
 from os import system
+
+
+# Add a parser so you can just throw a text file into this program instead of
+# typing everything by hand. Possibly yaml
+#
+# Inputs:
+# Board width
+# Board height
+# Random soup or specified input
+# Rulestring
+
+
 
 def newBoard(rows, cols):
     board = np.zeros((rows, cols), dtype=int)
@@ -66,31 +93,7 @@ def iterate(board):
                 tempBoard[i][j] = board[i][j]
 
     return tempBoard
-
-
-def addGlider(board):
-    board[0][1] = 1
-    board[1][2] = 1
-    board[2][0] = 1
-    board[2][1] = 1
-    board[2][2] = 1
-
-    return board
-
-
-def rTetromino(board):
-    # Find middle
-    center_x = int(len(board) / 2)
-    center_y = int(len(board[0]) / 2)
-
-    board[center_y][center_x] = 1
-    board[center_y + 1][center_x] = 1
-    board[center_y - 1][center_x] = 1
-    board[center_y][center_x - 1] = 1
-    board[center_y - 1][center_x + 1] = 1
-
-    return board
-    
+   
 
 def main():
     rows = int(input("Number of rows: "))
@@ -110,10 +113,5 @@ def main():
 
 
 main()
-
-
-
-
-
 
 
