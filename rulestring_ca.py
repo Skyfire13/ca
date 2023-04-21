@@ -48,6 +48,8 @@ def printBoard(board):
         print()
 
 
+   
+
 def randomizeBoard(board):
     tempBoard = board
     for i in range(len(board)):
@@ -78,16 +80,36 @@ def countNeighbors(board, r, c):
     return count
 
 
-def iterate(board):
+def processRulestring(rulestring):
+    born = False;
+    survive = False;
+
+    # Arrays of numbers for each action
+    born_values = rulestring[:rulestring.find('s')].strip('b')
+    survive_values = rulestring[rulestring.find('s'):].strip('s')
+
+    return born_values, survive_values
+
+    
+
+
+def iterate(board, rulestring):
+
+    born, survive = processRulestring(rulestring)
+
     tempBoard = newBoard(len(board),len(board[0]))
     for i in range(len(board)):
         for j in range(len(board[i])):
-            c = countNeighbors(board, i, j)
+            neighbors = countNeighbors(board, i, j)
+            if (board[i][j] == 0) and (count.neighbors())
+
+
+
             if ((board[i][j] == 1) and (c < 2)):
                 tempBoard[i][j] = 0
-            elif ((board[i][j] == 1) and (c > 3)):
+            elif ((board[i][j] == 1) and (neighbors > 3)):
                 tempBoard[i][j] = 0
-            elif ((board[i][j] == 0) and (c == 3)):
+            elif ((board[i][j] == 0) and (neighbors == 3)):
                 tempBoard[i][j] = 1
             else:
                 tempBoard[i][j] = board[i][j]
@@ -112,6 +134,6 @@ def main():
         time.sleep(0.025)
 
 
-main()
+#main()
 
 
