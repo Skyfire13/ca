@@ -34,7 +34,6 @@ from os import system
 
 def newBoard(rows, cols):
     board = np.zeros((rows, cols), dtype=int)
-
     return board
 
 
@@ -55,7 +54,6 @@ def randomizeBoard(board):
     for i in range(len(board)):
         for j in range(len(board[i])):
             tempBoard[i][j] = random.choice([0,1])
-
     return tempBoard
 
 
@@ -64,7 +62,6 @@ def fillBoard(board):
     for i in range(len(board)):
         for j in range(len(board[i])):
             tempBoard[i][j] = 1
-
     return tempBoard
 
 
@@ -76,7 +73,6 @@ def countNeighbors(board, r, c):
                 continue
             if board[i][j] == 1:
                 count +=1
-
     return count
 
 
@@ -87,12 +83,11 @@ def processRulestring(rulestring):
     # Arrays of numbers for each action
     born_values = rulestring[:rulestring.find('s')].strip('b')
     survive_values = rulestring[rulestring.find('s'):].strip('s')
-
     return born_values, survive_values
 
     
 
-
+# Remember to use matplotlib.animate
 def iterate(board, rulestring):
 
     born, survive = processRulestring(rulestring)
@@ -100,40 +95,34 @@ def iterate(board, rulestring):
     tempBoard = newBoard(len(board),len(board[0]))
     for i in range(len(board)):
         for j in range(len(board[i])):
-            neighbors = countNeighbors(board, i, j)
-            if (board[i][j] == 0) and (count.neighbors())
-
-
-
-            if ((board[i][j] == 1) and (c < 2)):
-                tempBoard[i][j] = 0
-            elif ((board[i][j] == 1) and (neighbors > 3)):
-                tempBoard[i][j] = 0
-            elif ((board[i][j] == 0) and (neighbors == 3)):
+            num_neighbors = str(countNeighbors(board, i, j))
+            if board[i][j] == 0 and num_neighbors in born:
+                tempBoard[i][j] = 1
+            elif board[i][j] == 1 and num_neighbors in survive:
                 tempBoard[i][j] = 1
             else:
-                tempBoard[i][j] = board[i][j]
-
+                tempBoard[i][j] = 0
     return tempBoard
    
 
 def main():
-    rows = int(input("Number of rows: "))
-    cols = int(input("Number of columns: "))
-    board = newBoard(rows, cols)
-    #board = addGlider(board)
-    #board = randomizeBoard(board)
-    board = rTetromino(board)
+    #rows = int(input("Number of rows: "))
+    #cols = int(input("Number of columns: "))
 
+    rows = 50
+    cols = 50
+    rulestring = 'b35678s5678'
+    board = newBoard(rows, cols)
+    board = randomizeBoard(board)
 
     #main game loop
     while True:
         system('clear')
         printBoard(board)
-        board = iterate(board)
+        board = iterate(board, rulestring)
         time.sleep(0.025)
 
 
-#main()
+main()
 
 
