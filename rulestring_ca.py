@@ -123,13 +123,17 @@ def main() -> None:
     rows = 100
     cols = 100
     iterations = 0
-    # rulestring = '5:23457'
+    #rulestring = '5:23457'
     #rulestring = '45:23457'
     #rulestring = '345:23457'
     #rulestring = '345:5'
-    rulestring = '3456:5'
+    #rulestring = '3456:5'
     # rulestring = '28:012345678' <- Frost
-    rulestring = '18:345678'
+    #rulestring = '28:012345678'
+    #rulestring = '34:34'
+    rulestring = '34:34'
+    
+    #rulestring = '3:23'
 
     # No rulestring with birth values exclusively lower than 4
     # cannot grow. There would need to be an empty cell at the
